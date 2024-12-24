@@ -1,10 +1,9 @@
 pipeline {
-    agent any
-    tools {
-        jdk "jdk11"
-    }
+    agent none
+    
     stages {
         stage('Compile') {
+        agent any
             steps {
                 echo "Compile the code"
                 sh "mvn compile"
@@ -12,6 +11,7 @@ pipeline {
         }
 
         stage('Unit test') {
+        agent any
             steps {
                 echo "Test the code"
                 sh "mvn test"
@@ -19,6 +19,7 @@ pipeline {
         }
 
         stage('Package') {
+        agent {label 'linux_slave'}
             steps {
                 echo "Package the code"
                 sh "mvn package"
