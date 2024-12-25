@@ -46,7 +46,7 @@ pipeline {
                 BRANCH_NAME == 'sept'   //this should be added in all branches jenkins file
             }
         }
-        agent {label 'linux_slave'}
+        agent any //{label 'linux_slave'}
              input{
               message "select the version to deploy"
               ok "OK"
@@ -56,7 +56,7 @@ pipeline {
         }
             steps {
                 script{
-                    sshagent{[Slave2]}
+                    sshagent([Slave2])
                     echo "Package the code ${params.APPVERSION}"
                     sh "scp -o StrictHostKeyChecking=no server-script.sh ${DEV_SERVER_IP}:/home/ec2-user" //for first time connection
                     sh "ssh -o StrictHostKeyChecking=no ${DEV_SERVER_IP} 'bash ~/server-script.sh' "
