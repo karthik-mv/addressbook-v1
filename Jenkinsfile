@@ -38,6 +38,11 @@ pipeline {
         }
 
         stage('Package') {
+        when{
+            expression{
+                BRANCH_NAME == 'sept'
+            }
+        }
         agent {label 'linux_slave'}
              input{
               message "select the version to deploy"
