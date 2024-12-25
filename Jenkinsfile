@@ -46,7 +46,7 @@ pipeline {
                 BRANCH_NAME == 'sept'   //this should be added in all branches jenkins file
             }
         }
-        agent any //{label 'linux_slave'}
+        agent {label 'linux_slave'}
              input{
               message "select the version to deploy"
               ok "OK"
