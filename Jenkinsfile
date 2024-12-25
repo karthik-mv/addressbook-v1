@@ -5,7 +5,7 @@ pipeline {
         maven "mymaven"
     }
     environment{
-        DEV_SERVER_IP='ec2-user@172.31.18.93'
+        DEV_SERVER_IP='ec2-user@172.31.27.13'
     }
     parameters {
         string(name: 'Env', defaultValue: 'Test', description: 'Env to deploy')
@@ -56,7 +56,7 @@ pipeline {
         }
             steps {
                 script{
-                    sshagent(['Slave2']){
+                    sshagent(['slave2']){
                     echo "Package the code ${params.APPVERSION}"
                     sh "scp -v -o StrictHostKeyChecking=no server-script.sh ${DEV_SERVER_IP}:/home/ec2-user" //for first time connection
                     sh "ssh -v -o StrictHostKeyChecking=no ${DEV_SERVER_IP} 'bash ~/server-script.sh'"
