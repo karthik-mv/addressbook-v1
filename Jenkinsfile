@@ -39,12 +39,12 @@ pipeline {
 
         stage('Package') {
         agent {label 'linux_slave'}
-        input{
-            message "select the version to deploy"
-            ok "OK"
-            parameters{
+             input{
+              message "select the version to deploy"
+              ok "OK"
+             parameters{
                 choice (name: 'APP', choices:['1.1','2.1','3.1'])
-            }
+             }
         }
             steps {
                 echo "Package the code"
