@@ -9,7 +9,7 @@ pipeline {
     }
     parameters {
         string(name: 'Env', defaultValue: 'Test', description: 'Env to deploy')
-        booleanParam(name: 'Executetests', defaultValue: true, description: 'decide to run test cases')
+        booleanParam(name: 'executeTests', defaultValue: true, description: 'decide to run test cases')
         choice(name: 'APPVERSION', choices: ['1.1', '2.1', '3.1'])
     }
     stages {
@@ -24,7 +24,7 @@ pipeline {
         stage('Unit test') {
         when{
             expression{
-                Executetests == true
+                executeTests == true
             }
         }
         agent any
@@ -46,7 +46,7 @@ pipeline {
                 BRANCH_NAME == 'sept'   //this should be added in all branches jenkins file
             }
         }
-        agent any //{label 'linux_slave'}
+        agent {label 'linux_slave'}
              input{
               message "select the version to deploy"
               ok "OK"
