@@ -4,6 +4,9 @@ pipeline {
         //jdk "jdk11"
         maven "mymaven"
     }
+    environment{
+        DEV_SERVER_IP='ec2-user@172.31.18.93'
+    }
     parameters {
         string(name: 'Env', defaultValue: 'Test', description: 'Env to deploy')
         booleanParam(name: 'Executetests', defaultValue: true, description: 'decide to run test cases')
@@ -26,7 +29,7 @@ pipeline {
         }
         agent any
             steps {
-                echo "Test the code"
+                echo "Test the code in ${params.Env}"
                 sh "mvn test"
             }     
 
@@ -40,7 +43,7 @@ pipeline {
         stage('Package') {
         when{
             expression{
-                BRANCH_NAME == 'sept'
+                BRANCH_NAME == 'sept'   //this should be added in all branches jenkins file
             }
         }
         agent {label 'linux_slave'}
@@ -52,8 +55,14 @@ pipeline {
              }
         }
             steps {
-                echo "Package the code"
-                sh "mvn package"
+                script{
+                    sshagent{[PACKAGE_SERVER]}
+                    echo "Package the code ${params.APPVERSION}"
+                    sh "scp -o StrictHostKeyChecking=no server-script.sh ${DEV_SERVER_IP}:/home/ec2-user" //for first time connection
+                    sh "ssh -o StrictHostKeyChecking=no ${DEV_SERVER_IP} 'bash ~/server-script.sh' "
+                    
+                }
+                
             }        
         }
     }   
