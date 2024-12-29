@@ -7,7 +7,7 @@
 sudo yum install docker -y
 sudo systemctl start docker
 
-if [-d "addressbook-v1"]
+if [-d "addressbook"]
 then
     echo "repo is cloned and exists"
     cd /home/ec2-user/addressbook-v1
