@@ -6,6 +6,7 @@
 
 sudo yum install docker -y
 sudo systemctl start docker
+sudo yum install git -y
 
 if [-d "addressbook"]
 then
