@@ -10,12 +10,12 @@ sudo systemctl start docker
 if [-d "addressbook"]
 then
     echo "repo is cloned and exists"
-    cd /home/ec2-user/addressbook-v1
+    cd /home/ec2-user/addressbook
     git pull origin docker
 else
     git clone https://github.com/karthik-mv/addressbook-v1.git
 fi
 
-cd /home/ec2-user/addressbook-v1
+cd /home/ec2-user/addressbook
 git checkout docker
-sudo docker build -t $1:$2 /home/ec2-user/addressbook-v1    #$1 represents repository name $2 represents jenkins build no
+sudo docker build -t $1:$2 /home/ec2-user/addressbook    #$1 represents repository name $2 represents jenkins build no
