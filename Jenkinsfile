@@ -48,11 +48,11 @@ pipeline {
                         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                             echo "Package the code ${params.APPVERSION}"
                             // Install Docker on the deploy server
-                            sh "ssh -v -o StrictHostKeyChecking=no ${DEPLOY_SERVER_IP} sudo yum install docker -y"
+                            sh "ssh -v -o StrictHostKeyChecking=no ${DEV_SERVER_IP} sudo yum install docker -y"
                             sh "ssh -v -o StrictHostKeyChecking=no ${DEV_SERVER_IP} 'bash ~/server-script.sh' ${IMAGE_NAME} ${BUILD_NUMBER}"
                             // Login to Docker Hub and push the image
                             sh "ssh ${DEV_SERVER_IP} sudo docker login -u ${USERNAME} -p ${PASSWORD}"
-                            sh "ssh ${DEPLOY_SERVER_IP} sudo docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+                            sh "ssh ${DEV_SERVER_IP} sudo docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
                         }
                     }
                 }
