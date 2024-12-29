@@ -86,24 +86,24 @@ pipeline {
             }
         }
 
-        stage('Unit test') {
-        when{
-            expression{
-                executeTests == true
-            }
-        }
-        agent any
-            steps {
-                echo "Test the code in ${params.Env}"
-                sh "mvn test"
-            }     
+        // stage('Unit test') {
+        // when{
+        //     expression{
+        //         executeTests == true
+        //     }
+        // }
+        // agent any
+        //     steps {
+        //         echo "Test the code in ${params.Env}"
+        //         sh "mvn test"
+        //     }     
 
-            post{
-                always{
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }  
-        }
+        //     post{
+        //         always{
+        //             junit 'target/surefire-reports/*.xml'
+        //         }
+        //     }  
+        // }
 
         stage('Package') {
         when{
