@@ -77,7 +77,7 @@ pipeline {
 
     
 
-    stages {
+    
         stage('Deploy') {
         agent any
             steps {
@@ -136,5 +136,5 @@ pipeline {
                 
             }        
         }
-    }   
+      
 }
