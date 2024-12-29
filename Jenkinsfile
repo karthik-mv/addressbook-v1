@@ -79,12 +79,12 @@ pipeline {
 
     
         stage('Deploy') {
-        agent any
-            steps {
-                echo "Compile the code"
-                sh "mvn compile"
-            }
-        }
+        // agent any
+        //     steps {
+        //         echo "Compile the code"
+        //         sh "mvn compile"
+        //     }
+        // }
 
         // stage('Unit test') {
         // when{
@@ -105,12 +105,12 @@ pipeline {
         //     }  
         // }
 
-        stage('Package') {
-        when{
-            expression{
-                BRANCH_NAME == 'docker'   //this should be added in all branches jenkins file
-            }
-        }
+        // stage('Package') {
+        // when{
+        //     expression{
+        //         BRANCH_NAME == 'docker'   //this should be added in all branches jenkins file
+        //     }
+        // }
         agent any//{label 'linux_slave'}
              input{
               message "select the version to deploy"
