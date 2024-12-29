@@ -78,7 +78,7 @@ pipeline {
        
         when{
             expression{
-                BRANCH_NAME == 'docker-1'
+                BRANCH_NAME == 'docker'
             }
         }
         agent any
