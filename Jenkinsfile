@@ -25,7 +25,7 @@ pipeline {
         stage('Unit test') {
             when {
                 expression {
-                    executeTests == true
+                    return params.executeTests == true
                 }
             }
             agent any
