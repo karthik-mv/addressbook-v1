@@ -8,7 +8,7 @@ pipeline {
    environment{
     DEV_SERVER_IP='ec2-user@172.31.16.83'
     DEPLOY_SERVER_IP='ec2-user@172.31.26.244'
-    IMAGE_NAME='devopstrainer/java-mvn-privaterepos'
+    IMAGE_NAME='karthikmv93/docker'
    }
 
    parameters{
