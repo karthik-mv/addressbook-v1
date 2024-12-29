@@ -8,15 +8,15 @@ sudo yum install docker -y
 sudo systemctl start docker
 sudo yum install git -y
 
-if [-d "addressbook"]
+if [-d "addressbook0-v1"]
 then
     echo "repo is cloned and exists"
-    cd /home/ec2-user/addressbook
+    cd /home/ec2-user/addressbook-v1
     git pull origin docker
 else
     git clone https://github.com/karthik-mv/addressbook-v1.git
 fi
 
-cd /home/ec2-user/addressbook
+cd /home/ec2-user/addressbook-v1
 git checkout docker
-sudo docker build -t $1:$2 /home/ec2-user/addressbook    #$1 represents repository name $2 represents jenkins build no
+sudo docker build -t $1:$2 /home/ec2-user/addressbook-v1    #$1 represents repository name $2 represents jenkins build no
